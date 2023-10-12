@@ -2,20 +2,21 @@ import {
     Text,
     View,
     Button,
+    Pressable,
     TextInput,
     StyleSheet,
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import SearchResultScreen from './SearchResult';
+
 
 
 
 const SearchScreen = ({ navigation }) => {
 
+    const Stack = createNativeStackNavigator();
     const [data, setData] = useState({});
     const getCities = (input: string) => {
         fetch('https://geo.api.gouv.fr/communes?nom=' + input + '&boost=population&limit=5')
@@ -23,22 +24,28 @@ const SearchScreen = ({ navigation }) => {
                 response.json()
                     .then((res) => {
                         setData(res);
-                        console.log(data);
                     })
             })
     }
 
     return (
+
         <LinearGradient colors={['#74C0E4', '#6E92CC']} style={styles.Container}>
+
 
             <TextInput
                 style={styles.input}
                 placeholder="Rechercher"
                 onChangeText={getCities}
             />
-            {data.map((city) => (
-                <Text>{city.nom}</Text>
-            ))}
+            {Object.keys(data).length !== 0 ? data.map((city) => (
+                <Pressable style={styles.SearchResult} key={city.nom}
+                    onPress={() => navigation.navigate('Result', { city: city.nom })}
+                >
+                    <Text>{city.nom}</Text>
+                </Pressable>
+            ))
+                : ''}
         </LinearGradient>
     );
 }
@@ -57,5 +64,15 @@ const styles = StyleSheet.create({
         width: "90%",
         color: '#FCFCFC',
         backgroundColor: 'rgba(252, 252, 252, 0.25)',
+    },
+    SearchResult: {
+        borderRadius: 12,
+        marginTop: 4,
+        marginBottom: 4,
+        width: "90%",
+        height: 40,
+        backgroundColor: '#4B77BD',
+        padding: 10,
+        color: '#FCFCFC',
     },
 });

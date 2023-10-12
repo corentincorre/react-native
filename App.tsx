@@ -29,6 +29,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import HomeScreen from './src/pages/Home';
 import SearchScreen from './src/pages/Search';
+import SearchResultScreen from './src/pages/SearchResult';
 
 import IconHome from "./src/assets/img/icons/icon-home.svg";
 import IconSearch from "./src/assets/img/icons/icon-search.svg";
@@ -36,7 +37,6 @@ import IconSearch from "./src/assets/img/icons/icon-search.svg";
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-  const Stack = createNativeStackNavigator();
   const BottomNav = createBottomTabNavigator();
 
   const backgroundStyle = {
@@ -55,10 +55,10 @@ function App(): JSX.Element {
               return <IconHome width={45} height={45} fill={focused ? '#EB9632' : '#FCFCFC'} />;
             }
             case 'Search': {
-              return <IconSearch />;
+              return <IconSearch width={45} height={45} fill={focused ? '#EB9632' : '#FCFCFC'} />;
             }
             default: {
-              return <IconHome />;
+              return <IconHome width={45} height={45} fill={focused ? '#EB9632' : '#FCFCFC'} />;
             }
           }
         },
@@ -69,9 +69,31 @@ function App(): JSX.Element {
           height: 67,
           fontSize: 14,
         },
+        tabBarHideOnKeyboard: true,
       })}>
-        <BottomNav.Screen name="Home" component={HomeScreen} options={{ title: 'Accueil' }} />
-        <BottomNav.Screen name="Search" component={SearchScreen} options={{ title: 'Rechercher' }} />
+        <BottomNav.Screen name="Home" component={HomeScreen} options={{
+          title: 'Accueil',
+          headerStyle: {
+            backgroundColor: '#4B77BD',
+          },
+          headerTintColor: '#FCFCFC',
+        }} />
+        <BottomNav.Screen name="Search" component={SearchScreen} options={{
+          title: 'Rechercher',
+          headerStyle: {
+            backgroundColor: '#4B77BD',
+          },
+          headerTintColor: '#FCFCFC'
+        }} />
+        <BottomNav.Screen name="Result" component={SearchResultScreen} options={{
+          title: 'Résultat de recherche',
+          headerStyle: {
+            backgroundColor: '#4B77BD',
+          },
+          headerTintColor: '#FCFCFC',
+          unmountOnBlur: true,
+          tabBarButton: () => null
+        }} />
       </BottomNav.Navigator>
     </NavigationContainer>
   );
