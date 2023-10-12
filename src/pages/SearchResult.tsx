@@ -2,6 +2,7 @@ import {
     Text,
     View,
     Button,
+    Pressable,
     StyleSheet,
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
@@ -18,7 +19,6 @@ const SearchResultScreen = ({ route, navigation }) => {
             .then((data) => {
                 data.json()
                     .then((res) => {
-                        console.log(res)
                         setData({
                             temp: res.list[0].main.temp,
                             wind: res.list[0].wind.speed,
@@ -40,11 +40,13 @@ const SearchResultScreen = ({ route, navigation }) => {
 
     return (
         isLoading ? <Text style={styles.DateStyle}>Chargement...</Text> : <LinearGradient colors={['#74C0E4', '#6E92CC']} style={styles.Container}>
-            <Button title="Retour" onPress={() => navigation.goBack()} />
+            <Pressable style={styles.Return} onPress={() => navigation.goBack()} >
+                <Text style={styles.ReturnText}> Retour</Text>
+            </Pressable>
             <Text style={styles.CityStyle}>{city}</Text>
             <Text style={styles.DateStyle}>{formatDate(new Date())}</Text>
             <Text style={styles.TemperatureStyle}>{data.temp}°</Text>
-            <Text style={styles.DateStyle}>humidité : {data.humidity} %</Text>
+            <Text style={styles.DateStyle}>humidité : {data.humidity} g/m³</Text>
             <Text style={styles.DateStyle}>vent : {data.wind} km/h</Text>
         </LinearGradient>
     );
@@ -73,6 +75,17 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         fontSize: 72,
         color: '#FCFCFC',
+    },
+    Return: {
+
+        position: "absolute",
+        top: 10,
+        left: 20,
+    },
+    ReturnText: {
+        fontSize: 20,
+        fontWeight: "700",
+        color: "#FCFCFC"
     }
 
 });

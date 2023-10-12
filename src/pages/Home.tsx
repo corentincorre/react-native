@@ -11,16 +11,11 @@ import LinearGradient from 'react-native-linear-gradient';
 const mapBackground = { uri: 'https://www.pngmart.com/files/17/France-Map-Region-PNG-File.png' };
 
 const HomeScreen = ({ navigation }) => {
-
-    function formatDate(date: Date) {
-        const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        return new Intl.DateTimeFormat('fr-FR', options).format(date);
-    }
     return (
         <LinearGradient colors={['#74C0E4', '#6E92CC']} style={styles.Container}>
             <Text style={styles.WelcomeTextStyle}>Bienvenue sur météo ville</Text>
             <ImageBackground source={mapBackground} style={styles.Map} resizeMode="contain">
-
+                <Text style={[styles.itemMap, styles.Bordeaux]}></Text>
             </ImageBackground>
         </LinearGradient>
     );
@@ -38,6 +33,7 @@ const styles = StyleSheet.create({
     WelcomeTextStyle: {
         fontWeight: "700",
         fontSize: 24,
+        marginBottom: 48,
         color: '#FCFCFC',
     },
     DateStyle: {
@@ -55,5 +51,10 @@ const styles = StyleSheet.create({
         padding: 50,
         height: 400,
         width: 400,
+    },
+    itemMap: {
+        position: "absolute",
+        backgroundColor: "black",
+        color: "#FCFCFC"
     }
 });
