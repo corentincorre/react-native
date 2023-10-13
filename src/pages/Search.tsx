@@ -36,8 +36,8 @@ const SearchScreen = ({ navigation }) => {
                 placeholder="Rechercher"
                 onChangeText={getCities}
             />
-            {Object.keys(data).length !== 0 ? data.map((city) => (
-                <Pressable style={styles.SearchResult} key={city.nom}
+            {Object.keys(data).length !== 0 ? data.map((city: Object, index: any) => (
+                <Pressable style={styles.SearchResult} key={index}
                     onPress={() => navigation.navigate('Result', { city: city.nom })}
                 >
                     <Text>{city.nom}</Text>

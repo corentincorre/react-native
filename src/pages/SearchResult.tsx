@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
+import formatDate from '../Helpers/formatDate';
 
 const SearchResultScreen = ({ route, navigation }) => {
     const { city } = route.params;
@@ -11,7 +12,7 @@ const SearchResultScreen = ({ route, navigation }) => {
     const [data, setData] = useState({});
     const [isLoading, setLoading] = useState(true);
 
-    function getDataFromApi(city: string) {
+    const getDataFromApi = (city: string) => {
         fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=1647a8b5e99a3cb5cef0b135e999fbb9&lang=fr&units=metric')
             .then((data) => {
                 data.json()
@@ -29,11 +30,6 @@ const SearchResultScreen = ({ route, navigation }) => {
     useEffect(() => {
         getDataFromApi(city);
     }, []);
-
-    function formatDate(date: Date) {
-        const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        return new Intl.DateTimeFormat('fr-FR', options).format(date);
-    }
 
     return (
         isLoading ? <Text style={styles.DateStyle}>Chargement...</Text> : <LinearGradient colors={['#74C0E4', '#6E92CC']} style={styles.Container}>
