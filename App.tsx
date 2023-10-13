@@ -30,6 +30,7 @@ import {
 import HomeScreen from './src/pages/Home';
 import SearchScreen from './src/pages/Search';
 import SearchResultScreen from './src/pages/SearchResult';
+import BottomMenu from './src/components/BottomMenu';
 
 import IconHome from "./src/assets/img/icons/icon-home.svg";
 import IconSearch from "./src/assets/img/icons/icon-search.svg";
@@ -37,7 +38,7 @@ import IconSearch from "./src/assets/img/icons/icon-search.svg";
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-  const BottomNav = createBottomTabNavigator();
+  const BottomNav = createNativeStackNavigator();
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -47,30 +48,7 @@ function App(): JSX.Element {
 
   return (
     <NavigationContainer>
-      <BottomNav.Navigator screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-
-          switch (route.name) {
-            case 'Home': {
-              return <IconHome width={45} height={45} fill={focused ? '#EB9632' : '#FCFCFC'} />;
-            }
-            case 'Search': {
-              return <IconSearch width={45} height={45} fill={focused ? '#EB9632' : '#FCFCFC'} />;
-            }
-            default: {
-              return <IconHome width={45} height={45} fill={focused ? '#EB9632' : '#FCFCFC'} />;
-            }
-          }
-        },
-        tabBarActiveTintColor: '#EB9632',
-        tabBarInactiveTintColor: '#FCFCFC',
-        tabBarStyle: {
-          backgroundColor: '#4B77BD',
-          height: 67,
-          fontSize: 14,
-        },
-        tabBarHideOnKeyboard: true,
-      })}>
+      <BottomNav.Navigator>
         <BottomNav.Screen name="Home" component={HomeScreen} options={{
           title: 'Accueil',
           headerStyle: {
@@ -91,10 +69,9 @@ function App(): JSX.Element {
             backgroundColor: '#4B77BD',
           },
           headerTintColor: '#FCFCFC',
-          unmountOnBlur: true,
-          tabBarButton: () => null
         }} />
       </BottomNav.Navigator>
+      <BottomMenu></BottomMenu>
     </NavigationContainer>
   );
 }

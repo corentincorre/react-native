@@ -1,12 +1,10 @@
 import {
     Text,
-    View,
-    Button,
     Pressable,
     TextInput,
     StyleSheet,
 } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 

@@ -1,7 +1,5 @@
 import {
     Text,
-    View,
-    Button,
     StyleSheet,
     ImageBackground,
 } from 'react-native';
@@ -15,7 +13,6 @@ const HomeScreen = ({ navigation }) => {
         <LinearGradient colors={['#74C0E4', '#6E92CC']} style={styles.Container}>
             <Text style={styles.WelcomeTextStyle}>Bienvenue sur météo ville</Text>
             <ImageBackground source={mapBackground} style={styles.Map} resizeMode="contain">
-                <Text style={[styles.itemMap, styles.Bordeaux]}></Text>
             </ImageBackground>
         </LinearGradient>
     );

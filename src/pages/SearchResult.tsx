@@ -1,8 +1,5 @@
 import {
     Text,
-    View,
-    Button,
-    Pressable,
     StyleSheet,
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
@@ -40,9 +37,6 @@ const SearchResultScreen = ({ route, navigation }) => {
 
     return (
         isLoading ? <Text style={styles.DateStyle}>Chargement...</Text> : <LinearGradient colors={['#74C0E4', '#6E92CC']} style={styles.Container}>
-            <Pressable style={styles.Return} onPress={() => navigation.goBack()} >
-                <Text style={styles.ReturnText}> Retour</Text>
-            </Pressable>
             <Text style={styles.CityStyle}>{city}</Text>
             <Text style={styles.DateStyle}>{formatDate(new Date())}</Text>
             <Text style={styles.TemperatureStyle}>{data.temp}°</Text>
